@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Be My Valentine 💖</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:linear-gradient(to top,#ff9ec4,#ffe6f0);
+  font-family:'Comic Sans MS', cursive;
+  overflow:hidden;
+  text-align:center;
+}
+
+h1{
+  font-size:34px;
+  color:white;
+  text-shadow:0 0 15px rgba(255,0,100,0.8);
+  margin-bottom:60px;
+}
+
+button{
+  padding:15px 40px;
+  font-size:22px;
+  border:none;
+  border-radius:40px;
+  cursor:pointer;
+  transition:0.3s ease;
+  position:fixed;
+}
+
+/* YES */
+#yes{
+  background:#ff2e63;
+  color:white;
+  left:25%;
+  bottom:120px;
+}
+
+/* NO */
+#no{
+  background:white;
+  color:#ff2e63;
+  right:25%;
+  bottom:120px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Will you be my Valentine? 💘</h1>
+
+<button id="yes">Yes 💖</button>
+<button id="no">No 🙈</button>
+
+<script>
+
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+
+let yesSize = 22;
+let noSize = 22;
+let clickCount = 0;
+
+const noTexts = [
+  "No 🙈",
+  "Are you sure? 😢",
+  "Think again 😭",
+  "Really really sure?? 🥺",
+  "Maybe you are drunk 🤨",
+  "Heyyyy rethink pliwssss 😭",
+  "I will cry 😭💔",
+  "Don't do this 🥹",
+  "Last chance 😭",
+  "Okay fine... press Yes 😔💖"
+];
+
+function moveNo(){
+
+  // Change text
+  if(clickCount < noTexts.length){
+    noBtn.innerText = noTexts[clickCount];
+  }
+
+  clickCount++;
+
+  // Move randomly
+  const x = Math.random() * (window.innerWidth - 150);
+  const y = Math.random() * (window.innerHeight - 150);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noBtn.style.right = "auto";
+  noBtn.style.bottom = "auto";
+
+  // YES grows bigger
+  yesSize += 8;
+  yesBtn.style.fontSize = yesSize + "px";
+  yesBtn.style.padding = (yesSize/2) + "px " + yesSize + "px";
+
+  // NO shrinks
+  if(noSize > 8){
+    noSize -= 2;
+    noBtn.style.fontSize = noSize + "px";
+    noBtn.style.padding = (noSize/2) + "px " + noSize + "px";
+  }
+
+  // After too many clicks, NO disappears
+  if(clickCount > 12){
+    noBtn.style.display = "none";
+  }
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", moveNo);
+
+yesBtn.addEventListener("click", ()=>{
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      background:linear-gradient(to top,#ff2e63,#ff8fab);
+      color:white;
+      font-family:'Comic Sans MS', cursive;
+      text-align:center;
+    ">
+      <h1 style="font-size:60px;">
+        YAYYYYY 💖💖💖<br>
+        I LOVE YOUUUU 🥹💕
+      </h1>
+    </div>
+  `;
+});
+
+</script>
+
+</body>
+</html>
